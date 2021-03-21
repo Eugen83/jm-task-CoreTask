@@ -9,7 +9,7 @@ import java.util.*;
 public class UserDaoJDBCImpl implements UserDao {
     private Util util = new Util();
     private Connection connection = util.creatingConnection();
-    // private ResultSet resultSet = null;
+
 
     public UserDaoJDBCImpl() {
 
@@ -42,7 +42,7 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void saveUser(String name, String lastName, byte age) {
-        // int iage = age;
+
         try (PreparedStatement pstatement = connection.prepareStatement("INSERT INTO users (user_name, last_name, age) VALUES (?, ?, ?)")) {
             pstatement.setString(1, name);
             pstatement.setString(2, lastName);

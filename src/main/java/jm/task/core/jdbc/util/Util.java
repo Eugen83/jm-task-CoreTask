@@ -11,15 +11,13 @@ public class Util {
 
         Driver driver;
         Connection connection = null;
-     //   Statement statement = null;
-
 
         {
             try {
                 driver = new com.mysql.cj.jdbc.Driver();
                 DriverManager.registerDriver(driver);
                 connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-          //      statement = connection.createStatement();
+
 
             } catch (SQLException e) {
                 e.printStackTrace();
