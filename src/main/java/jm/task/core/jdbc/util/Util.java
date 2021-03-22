@@ -7,7 +7,7 @@ public class Util {
     private static final String PASSWORD = "root";
     private static final String USERNAME = "root";
 
-    public Connection creatingConnection() {
+    public static Connection creatingConnection() {
 
         Driver driver;
         Connection connection = null;

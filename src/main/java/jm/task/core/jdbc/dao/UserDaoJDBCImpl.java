@@ -6,9 +6,11 @@ import jm.task.core.jdbc.util.Util;
 import java.sql.*;
 import java.util.*;
 
+import static jm.task.core.jdbc.util.Util.creatingConnection;
+
 public class UserDaoJDBCImpl implements UserDao {
-    private Util util = new Util();
-    private Connection connection = util.creatingConnection();
+
+    private Connection connection = Util.creatingConnection();
 
 
     public UserDaoJDBCImpl() {
