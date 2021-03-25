@@ -4,6 +4,7 @@ import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.Util;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import javax.swing.text.html.parser.Entity;
@@ -13,7 +14,7 @@ import java.util.List;
 public class UserDaoHibernateImpl implements UserDao {
 
 Transaction transaction = null;
-
+SessionFactory sf = Util.getSessionFactory();
 
     public UserDaoHibernateImpl() {
 
@@ -22,7 +23,7 @@ Transaction transaction = null;
 
     @Override
     public void createUsersTable() {
-        try (Session session = Util.getSessionFactory().openSession()) {
+        try (Session session = sf.openSession()) {
             transaction = session.beginTransaction();
             String s = "CREATE TABLE IF NOT EXISTS users(Id int PRIMARY KEY AUTO_INCREMENT, user_name VARCHAR(45)," +
                     "last_name VARCHAR(100), age int)";
@@ -40,7 +41,7 @@ Transaction transaction = null;
 
     @Override
     public void dropUsersTable() {
-        try (Session session = Util.getSessionFactory().openSession()) {
+        try (Session session = sf.openSession()) {
             transaction = session.beginTransaction();
             Query query = session.createSQLQuery("DROP TABLE IF EXISTS users").addEntity(User.class);
             query.executeUpdate();
@@ -55,7 +56,7 @@ Transaction transaction = null;
 
     @Override
     public void saveUser(String name, String lastName, byte age) {
-        try (Session session = Util.getSessionFactory().openSession()) {
+        try (Session session = sf.openSession()) {
             transaction = session.beginTransaction();
             session.save(new User(name, lastName, age));
             transaction.commit();
@@ -69,7 +70,7 @@ Transaction transaction = null;
 
     @Transactional
     public void removeUserById(long id) {
-        try (Session session = Util.getSessionFactory().openSession()) {
+        try (Session session = sf.openSession()) {
             transaction = session.beginTransaction();
             Object user = session.load(User.class, id);
             session.delete(user);
@@ -84,7 +85,7 @@ Transaction transaction = null;
     @Override
     public List<User> getAllUsers() {
         List<User> userList = null;
-        try (Session session = Util.getSessionFactory().openSession()) {
+        try (Session session = sf.openSession()) {
             transaction = session.beginTransaction();
             userList = session.createQuery("From " + User.class.getSimpleName()).list();
             transaction.commit();
@@ -99,7 +100,7 @@ Transaction transaction = null;
 
     @Override
     public void cleanUsersTable() {
-        try (Session session = Util.getSessionFactory().openSession()) {
+        try (Session session = sf.openSession()) {
             transaction = session.beginTransaction();
             Query query = session.createQuery("delete from " + User.class.getSimpleName());
             query.executeUpdate();
