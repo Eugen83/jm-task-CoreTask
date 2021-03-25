@@ -9,7 +9,7 @@ public class Main {
         //UserDaoJDBCImpl userDao = new UserDaoJDBCImpl();
         UserService userService = new UserServiceImpl();
         userService.createUsersTable();
-        userService.saveUser("Petr", "Petrov", (byte) 15);
+       userService.saveUser("Petr", "Petrov", (byte) 15);
         userService.saveUser("Ivan", "Ivanov", (byte) 45);
         userService.saveUser("Jonh", "Smith", (byte) 35);
         userService.saveUser("User", "Aftermath", (byte) 33);
