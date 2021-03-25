@@ -13,8 +13,8 @@ import java.util.List;
 
 public class UserDaoHibernateImpl implements UserDao {
 
-Transaction transaction = null;
-SessionFactory sf = Util.getSessionFactory();
+private Transaction transaction = null;
+private SessionFactory sf = Util.getSessionFactory();
 
     public UserDaoHibernateImpl() {
 
